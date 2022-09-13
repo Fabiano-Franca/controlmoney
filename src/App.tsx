@@ -5,13 +5,14 @@ import Modal from 'react-modal';
 import { useState } from "react";
 import { NewTransactionModal } from "./components/NewTransactionModal";
 import { TransactionsProvider } from "./hooks/useTransactions";
+import { ToastContainer } from "react-toastify";
 
 Modal.setAppElement('#root');
 
 export function App() {
 
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
-
+    
   function handleOpenNewTransactionModal() {
     setIsNewTransactionModalOpen(true);
   }
@@ -19,6 +20,7 @@ export function App() {
   function handleCloseNewTransactionModal() {
     setIsNewTransactionModalOpen(false);
   }
+
 
   return (
     <TransactionsProvider>
@@ -29,7 +31,7 @@ export function App() {
         isOpen={isNewTransactionModalOpen}
         onRequestClose={handleCloseNewTransactionModal}
       />
-
+      <ToastContainer autoClose={3000} />
       <GlobalStyle />
     </TransactionsProvider>
   );

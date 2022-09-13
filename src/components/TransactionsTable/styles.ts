@@ -35,5 +35,35 @@ export const Container = styled.div`
             }
         }
 
+        thead{
+
+            th:nth-child(4), th:nth-child(5) {
+                text-align: center;
+            }
+        }
+
+        tbody{
+
+            td:nth-child(4), td:nth-child(5) {
+                text-align: center;
+            }
+
+            button {
+                font-size: 1rem;
+                color: #FFF;
+                background: var(--text-body);
+                border: 0;
+                padding: 0 2rem;
+                border-radius: 0.25rem;
+                height: 3rem;
+                
+                transition: filter 0.2s; //Seta a duração do efeito no filter
+
+                &:hover {
+                    filter: brightness(0.9); //Escurece o botão e todo seu conteudo ao passar o mouse
+                }
+            }
+        }
+
     }
 `;

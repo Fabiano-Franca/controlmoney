@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const GlobalStyle = createGlobalStyle`
     //Define as variáveis globais
@@ -6,14 +7,15 @@ export const GlobalStyle = createGlobalStyle`
         --background: #f0f2f5;
         --red: #e52e4d;
         --green: #33CC95;
-        --blue: #5429cc;
+        --green-dark: ##7CEBAC;
+        --blue: #1c62cc;
+        --blue-white:#6497E3;
 
         --blue-ligth: #6933ff;
 
         --text-title: #363f5f;
         --text-body: #969cb3;
 
-        --background: #f0f2f5;
         --shape: #FFFFFF;
     }
 
@@ -37,9 +39,8 @@ export const GlobalStyle = createGlobalStyle`
         }
     }
 
-
     body {
-        background: var(--background);
+        background: var(white);
         -webkit-font-smoothing: antialiased;
     }
 
@@ -68,7 +69,7 @@ export const GlobalStyle = createGlobalStyle`
     //Estilo do fundo do modal (área cinza)
     .react-modal-overlay {
         background: rgba(0, 0, 0, 0.5);
-
+        overflow-y: auto;
         position: fixed;
         top: 0;
         bottom: 0;
@@ -81,12 +82,16 @@ export const GlobalStyle = createGlobalStyle`
     }
     
     .react-modal-content {
+        margin-top: 16rem;
         width: 100%;
-        max-width: 576px;
-        background: var(--background);
+        //height: 100vh;
+        max-width: 720px;
+        background: white;
         padding: 3rem;
         position: relative;
         border-radius: 0.24rem;
+        
+
     }
 
     .react-modal-close {

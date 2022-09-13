@@ -1,75 +1,35 @@
-import { useContext } from 'react';
-import incomeImg from '../../assets/income.svg';
-import outcomeImg from '../../assets/outcome.svg';
-import totalImg from '../../assets/total.svg';
-import { useTransactions } from '../../hooks/useTransactions';
-
-
 import { Container } from "./styles";
+import { cpfMask } from './mask';
 
-export function Summary() {
+interface SummaryProps {
+    spinner: boolean;
+    handleSourceCpf: (cpf: string) => void;
+    cpf: string;
+    setCpf: (cpf: string) => void;
+}
 
-    const { transactions } = useTransactions();
+export function Summary({ handleSourceCpf, cpf, setCpf, spinner } : SummaryProps ) {
 
-    const summary = transactions.reduce((acc, transaction) => {
-        if (transaction.type == 'deposit') {
-            acc.deposits += transaction.amount;
-            acc.total += transaction.amount;
-        } else {
-            acc.withdraws += transaction.amount;
-            acc.total -= transaction.amount;
-        }
-        return acc;
-    }, {
-        deposits: 0,
-        withdraws: 0,
-        total: 0,
-    });
-
-    return (
+     return (
         <Container>
-            <div>
-                <header>
-                    <p>Entradas</p>
-                    <img src={incomeImg} alt="Entradas" />
-                </header>
-                <strong>
-                    {
-                        new Intl.NumberFormat('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL'
-                        }).format(summary.deposits)
-                    }
-                </strong>
-            </div>
-            <div>
-                <header>
-                    <p>Saídas</p>
-                    <img src={outcomeImg} alt="Entradas" />
-                </header>
-                <strong>
-                    -
-                    {
-                        new Intl.NumberFormat('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL'
-                        }).format(summary.withdraws)
-                    }
-                </strong>
-            </div>
             <div className="highlight-background">
                 <header>
-                    <p>Total</p>
-                    <img src={totalImg} alt="Entradas" />
+                    <p>Para realizar o seu agendamento, preencha o campo abaixo, com o CPF do Responsável Financeiro
+                         vinculado ao aluno na matrícula do ano letivo 2023.</p>
                 </header>
-                <strong>
-                    {
-                        new Intl.NumberFormat('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL'
-                        }).format(summary.total)
+                <input
+                    placeholder="Digite o CPF do Responsável Financeiro"
+                    onChange={event => setCpf(cpfMask(event.target.value))}
+                    value={cpf}
+                />
+
+                <button type="submit" onClick={() => handleSourceCpf(cpf)}>
+                    { spinner ?   
+                        <div className="loader">Loading...</div>
+                    : 
+                        <span>Buscar</span>
                     }
-                </strong>
+                </button>
             </div>
 
         </Container>
